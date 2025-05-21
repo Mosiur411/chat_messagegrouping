@@ -1,5 +1,9 @@
 import TextLogo from "./components/shared/textlogo";
-
+type Message = {
+  sender: string;
+  text: string;
+  outgoing: boolean;
+};
 const messages = [
   { id: 1, sender: "Jacob Jones", text: "Hey, how are you?", outgoing: false },
   { id: 2, sender: "You", text: "I'm good, thanks! How about you?", outgoing: true },
@@ -8,11 +12,10 @@ const messages = [
   { id: 5, sender: "Jacob Jones", text: "Looking forward to it.", outgoing: false },
 ];
 
-function isSameSender(messages:[], currentIndex:number) {
+function isSameSender(messages: Message[], currentIndex: number): boolean {
   if (currentIndex === 0) return false;
   return messages[currentIndex].sender === messages[currentIndex - 1].sender;
 }
-
 export default function Home() {
   return (
     <main className="w-[1080px] h-[1215px] mx-auto">
