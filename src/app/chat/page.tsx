@@ -3,7 +3,7 @@ import TextLogo from "../components/shared/textlogo";
 
 export default function ChatPage() {
     return (
-        <main className="w-[1080px] h-[1215px] mx-auto bg-gray-100 p-5">
+        <main className="w-[1080px] h-[1215px] mx-auto bg-gray-100 p-5 relative">
             {/* ============== header section ==============  */}
             <header>
                 <section className="flex justify-between items-center">
@@ -35,14 +35,7 @@ export default function ChatPage() {
             <hr/>
             
              {/* messages section */}
-             <section>
-                <ChatInput/>
-             </section>
-
-
-
-
-
+            
 
         </main>
     );

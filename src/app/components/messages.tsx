@@ -1,54 +1,71 @@
+"use client"; // Only if you manage client-side state here
 
-type Message = {
-  sender: string;
-  text: string;
-  outgoing: boolean;
-};
-const messages = [
-  { id: 1, sender: "Jacob Jones", text: "Hey, how are you?", outgoing: false },
-  { id: 2, sender: "You", text: "I'm good, thanks! How about you?", outgoing: true },
-  { id: 3, sender: "You", text: "Are you coming today?", outgoing: true },
-  { id: 4, sender: "Jacob Jones", text: "Yes, I'll be there.", outgoing: false },
-  { id: 5, sender: "Jacob Jones", text: "Looking forward to it.", outgoing: false },
-];
-
-function isSameSender(messages: Message[], currentIndex: number): boolean {
-  if (currentIndex === 0) return false;
-  return messages[currentIndex].sender === messages[currentIndex - 1].sender;
-}
+import { useState } from "react";
+import { IMessage } from "../lib/Interfaces/Interfaces.messages";
+import { DefaultMessages } from "../lib/messages";
+import ChatInput from "./shared/chatInput";
+import { formatTime } from "../lib/formatTime";
+import { isSameGroup } from "../lib/groupingrule";
 
 const Messages = () => {
+    const [newMessages, setNewMessages] = useState<IMessage[]>(DefaultMessages);
+
+    const handleSendMessage = (text: string) => {
+        const newMessage: IMessage = {
+            id: Date.now().toString(),
+            type: "outgoing",
+            text,
+            timestamp: Date.now(),
+            senderName: "Mosiur",
+            avatar: "/avatars/mosiur.png",
+        };
+
+        setNewMessages((prev) => [...prev, newMessage]);
+    };
+
     return (
-        <section className="max-w-[1048px] mx-auto mt-8 px-4 space-y-0">
-            {messages.map((msg, i) => {
-                const sameSenderAsPrev = isSameSender(messages, i);
-                return (
-                    <div
-                        key={msg.id}
-                        className={`flex ${msg.outgoing ? "justify-end" : "justify-start"
-                            }`}
-                    >
+        <>
+            <section className="max-w-[1048px] mx-auto mt-8 px-4 space-y-0">
+                {newMessages.map((msg, i) => {
+                    const isOutgoing = msg.type === "outgoing";
+                    const sameGroupAsPrev = isSameGroup(newMessages, i);
+
+                    return (
                         <div
-                            className={`
-                  max-w-[70%] px-4 py-2 rounded-lg
-                  ${msg.outgoing
-                                    ? "bg-[#A946BA] text-white rounded-tr-none"
-                                    : "bg-[#E2E8F0] text-[#1A202C] rounded-tl-none"
-                                }
-                  ${sameSenderAsPrev ? "mt-1" : "mt-4"}
-                `}
+                            key={i}
+                            className={`mb-2 flex ${isOutgoing ? "justify-end" : "justify-start"}`}
                         >
-                            {!sameSenderAsPrev && (
-                                <div className="text-xs font-semibold mb-1 select-none">
-                                    {msg.sender}
+                            <div>
+                                {
+                                    sameGroupAsPrev && <div className={`text-[11px] text-[#6C7584] select-none flex ${isOutgoing ? "justify-end" : "justify-start"} gap-2`}>
+                                        <span>{formatTime(msg.timestamp)}</span>
+                                        <span>•</span>
+                                        <span>{msg.senderName}</span>
+                                    </div>
+                                }
+
+                                <div
+                                    className={`
+                                        w-fit
+                                     px-4 py-2 rounded-lg
+                                        ${isOutgoing
+                                            ? "bg-[#D9E8FF] text-[#232F40] rounded"
+                                            : "bg-[#F1F4F5] text-[#232F40] rounded"}
+                                       `}
+                                >
+
+                                    <div>{msg.text}</div>
                                 </div>
-                            )}
-                            <div>{msg.text}</div>
+
+
+                            </div>
+
                         </div>
-                    </div>
-                );
-            })}
-        </section>
+                    );
+                })}
+            </section>
+            <ChatInput onSend={handleSendMessage} />
+        </>
     );
 };
 
