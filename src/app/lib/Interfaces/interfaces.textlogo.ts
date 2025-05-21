@@ -1,4 +1,4 @@
 export type ITextLogo = {
   text: string;
-  style?: string;
+  style?: 'bigtextLogo' | 'smalltextLogo';
 };

@@ -1,7 +1,9 @@
-export default function TextLogo() {
+import { ITextLogo } from "@/app/lib/Interfaces/interfaces.textlogo";
+
+export default function TextLogo({ text, style }: ITextLogo) {
     return (
-        <section>
-            Logo
-        </section>
+        <span className={style}>
+            {text}
+        </span>
     );
 }
