@@ -1,3 +1,4 @@
+import ChatInput from "../components/shared/chatInput";
 import TextLogo from "../components/shared/textlogo";
 
 export default function ChatPage() {
@@ -24,12 +25,25 @@ export default function ChatPage() {
                 <hr />
             </header>
             {/* ============== profile section ==============  */}
-            <section>
+            <section className="flex justify-start items-center gap-10 py-10">
                 <TextLogo text="J" style="bigtextLogo" />
                 <div>
                     <p>Jacob Jones started the chat</p>
+                    <p>Joined via Messenger</p>
                 </div>
             </section>
+            <hr/>
+            
+             {/* messages section */}
+             <section>
+                <ChatInput/>
+             </section>
+
+
+
+
+
+
         </main>
     );
 }
