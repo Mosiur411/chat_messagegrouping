@@ -1,7 +1,6 @@
 import ConversationInfo from "./components/conversationInfo";
 import Messages from "./components/messages";
 import SessionTag from "./components/sessiontag";
-import ChatInput from "./components/shared/chatInput";
 import Header from "./components/shared/header";
 
 export default function Home() {
