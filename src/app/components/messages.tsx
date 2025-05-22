@@ -5,7 +5,6 @@ import { IMessage } from "../lib/Interfaces/Interfaces.messages";
 import { DefaultMessages } from "../lib/messages";
 import ChatInput from "./shared/chatInput";
 import { formatTime } from "../lib/formatTime";
-import { isSameGroup } from "../lib/groupingrule";
 
 const Messages = () => {
     const [newMessages, setNewMessages] = useState<IMessage[]>(DefaultMessages);
@@ -28,21 +27,19 @@ const Messages = () => {
             <section className="max-w-[1048px] mx-auto mt-8 px-4 space-y-0">
                 {newMessages.map((msg, i) => {
                     const isOutgoing = msg.type === "outgoing";
-                    const sameGroupAsPrev = isSameGroup(newMessages, i);
+                    //const sameGroupAsPrev = isSameGroup(newMessages, i);
 
                     return (
                         <div
                             key={i}
                             className={`mb-2 flex ${isOutgoing ? "justify-end" : "justify-start"}`}
                         >
-                            <div>
-                                {
-                                    sameGroupAsPrev && <div className={`text-[11px] text-[#6C7584] select-none flex ${isOutgoing ? "justify-end" : "justify-start"} gap-2`}>
+                            <div><div className={`text-[11px] text-[#6C7584] select-none flex ${isOutgoing ? "justify-end" : "justify-start"} gap-2`}>
                                         <span>{formatTime(msg.timestamp)}</span>
                                         <span>•</span>
                                         <span>{msg.senderName}</span>
                                     </div>
-                                }
+                                
 
                                 <div
                                     className={`
@@ -54,7 +51,7 @@ const Messages = () => {
                                        `}
                                 >
 
-                                    <div>{msg.text}</div>
+                                    <div className="font-normal text-sm leading-5 align-middle">{msg.text}</div>
                                 </div>
 
 
