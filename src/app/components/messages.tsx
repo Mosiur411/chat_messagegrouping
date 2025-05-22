@@ -1,13 +1,14 @@
-"use client"; // Only if you manage client-side state here
-
-import { useState } from "react";
+"use client"; 
+import { useEffect, useRef, useState } from "react";
 import { IMessage } from "../lib/Interfaces/Interfaces.messages";
 import { DefaultMessages } from "../lib/messages";
 import ChatInput from "./shared/chatInput";
 import { formatTime } from "../lib/formatTime";
+import { isSameGroup } from "../lib/groupingrule";
 
 const Messages = () => {
     const [newMessages, setNewMessages] = useState<IMessage[]>(DefaultMessages);
+    const bottomRef = useRef<HTMLDivElement>(null);
 
     const handleSendMessage = (text: string) => {
         const newMessage: IMessage = {
@@ -22,25 +23,26 @@ const Messages = () => {
         setNewMessages((prev) => [...prev, newMessage]);
     };
 
+    useEffect(() => {
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [newMessages]);
+
     return (
         <>
             <section className="max-w-[1048px] mx-auto mt-8 px-4 space-y-0">
                 {newMessages.map((msg, i) => {
                     const isOutgoing = msg.type === "outgoing";
-                    //const sameGroupAsPrev = isSameGroup(newMessages, i);
-
+                    const sameGroupAsPrev = isSameGroup(newMessages, i);
                     return (
                         <div
                             key={i}
                             className={`mb-2 flex ${isOutgoing ? "justify-end" : "justify-start"}`}
                         >
                             <div><div className={`text-[11px] text-[#6C7584] select-none flex ${isOutgoing ? "justify-end" : "justify-start"} gap-2`}>
-                                        <span>{formatTime(msg.timestamp)}</span>
-                                        <span>•</span>
-                                        <span>{msg.senderName}</span>
-                                    </div>
-                                
-
+                                <span>{formatTime(msg.timestamp)}</span>
+                                <span>•</span>
+                                <span>{msg.senderName}</span>
+                            </div>
                                 <div
                                     className={`
                                         w-fit
@@ -50,18 +52,17 @@ const Messages = () => {
                                             : "bg-[#F1F4F5] text-[#232F40] rounded"}
                                        `}
                                 >
-
                                     <div className="font-normal text-sm leading-5 align-middle">{msg.text}</div>
                                 </div>
-
-
                             </div>
-
                         </div>
                     );
                 })}
             </section>
-            <ChatInput onSend={handleSendMessage} />
+            <div ref={bottomRef} >
+            <ChatInput   onSend={handleSendMessage} />
+
+            </div>
         </>
     );
 };
