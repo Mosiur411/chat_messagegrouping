@@ -12,8 +12,7 @@ const ChatInput = ({ onSend }: { onSend: (text: string) => void }) => {
     setText("");  // clear input
   };
 
-  let textfind = text?.length >= 1 ? false : true
-
+const textfind = text.trim().length === 0;
 
 
   return (
