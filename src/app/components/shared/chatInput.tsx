@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import { useState } from "react";
 
@@ -8,18 +7,17 @@ const ChatInput = ({ onSend }: { onSend: (text: string) => void }) => {
 
   const handleSend = () => {
     if (text.trim() === "") return;
-    onSend(text); // ✅ Call parent's function
-    setText("");  // clear input
+    onSend(text);
+    setText("");
   };
 
-const textfind = text.trim().length === 0;
-
+  const textfind = text.trim().length === 0;
 
   return (
     <section className="flex justify-center mt-8 px-4 pb-2">
       <div className="relative w-[1048px]">
         <textarea
-          className="w-full h-[95px] rounded-[16px] focus:border-[#A946BA] border-2 pt-[12px] pr-[60px] pb-[8px] pl-[8px]  border-[#DAE0E4] outline-0 resize-none"
+          className="w-full h-[164px] rounded-[16px] focus:border-[#A946BA] border-2 pt-[12px] pr-[60px] pb-[8px] pl-[8px]  border-[#DAE0E4] outline-0 resize-none"
           placeholder="Write message"
           value={text}
           onChange={(e) => setText(e.target.value)}
