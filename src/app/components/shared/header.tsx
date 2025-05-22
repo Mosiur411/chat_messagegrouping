@@ -27,7 +27,7 @@ const Header = () => {
             <section className="mx-auto w-[1044px] h-[32px] flex items-center justify-between gap-6">
                 {/* Left - User Info */}
                 <div className="w-[929px]">
-                    <div className="w-[150px] flex gap-2 items-center">
+                    <div className="flex gap-2 items-center">
                         <span className="w-[32px] h-[32px] flex justify-center items-center bg-[#FA8F53] text-white rounded-full">
                             J
                         </span>
