@@ -19,8 +19,8 @@
   - `id`
   - `type` (incoming / outgoing)
   - `text` (message content)
-  - `timestamp`
-  - `senderName` / `receiverName` (as needed)
+  - `timestamp` (6000)
+  - `senderName` / `receiverName` 
   - `avatar`
 
 ---
@@ -33,8 +33,6 @@
 - ✅ Applied Message Grouping Rule:
   - Messages from the same sender appear as a group **if sent within 1 minute**
   - New group starts if **time gap exceeds 1 minute**, even if sender is same
-- ✅ Pixel-perfect design implemented
-  - Fonts, colors, spacing all match the design reference
 
 ---
 
