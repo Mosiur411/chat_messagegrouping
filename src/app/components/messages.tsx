@@ -4,7 +4,6 @@ import { IMessage } from "../lib/Interfaces/Interfaces.messages";
 import { DefaultMessages } from "../lib/messages";
 import ChatInput from "./shared/chatInput";
 import { formatTime } from "../lib/formatTime";
-import { isSameGroup } from "../lib/groupingrule";
 
 const Messages = () => {
     const [newMessages, setNewMessages] = useState<IMessage[]>(DefaultMessages);
@@ -32,7 +31,6 @@ const Messages = () => {
             <section className="max-w-[1048px] mx-auto mt-8 px-4 space-y-0">
                 {newMessages.map((msg, i) => {
                     const isOutgoing = msg.type === "outgoing";
-                    const sameGroupAsPrev = isSameGroup(newMessages, i);
                     return (
                         <div
                             key={i}
