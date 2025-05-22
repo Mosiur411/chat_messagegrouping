@@ -36,8 +36,8 @@ const Header = () => {
                 </div>
 
                 {/* Right - Close Button */}
-                <div className="w-[91px] h-[32px] bg-[#A946BA] rounded-[10] text-white flex justify-evenly items-center cursor-pointer">
-                     <Image src={'/assets/icon/icon.svg'} width={16} height={16} alt={'close'}/>
+                <div className="w-[91px] h-[32px] bg-[#A946BA] rounded-[10] py-1.5 text-white flex justify-evenly items-center cursor-pointer">
+                     <Image src={'/assets/icon/close.svg'} width={16} height={16} alt={'close'}/>
                     <span>Close</span>
                 </div>
             </section>
